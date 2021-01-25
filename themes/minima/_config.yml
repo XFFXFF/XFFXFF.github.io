@@ -5,10 +5,10 @@ title: "Hi Folks."
 #owner
 owner: "I am zhou fan"
 # email: "test@test.com"
-info: "A learner and lover of rust"
+# info: "A learner and lover of rust"
 #description
 # desc: "This is Minima, an undoubtedly simple and lightweight dark/light mode theme for Hexo. I created this from scratch using Skeleton CSS boilerplate. It only uses CSS and Vanilla JS, without using unnecessary third-party 'render-blocking' libraries! 😁"
-desc: "突然想搞个博客，不知道能坚持多久，试试看呗~"
+desc: "当你想写点东西的时候，总会面临两个挑战：写这么基础的东西，会不会显得我很蠢？我会不会写错了被嘲笑？"
 
 #menu
 menu:
