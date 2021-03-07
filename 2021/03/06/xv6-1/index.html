@@ -280,7 +280,32 @@ Usage: rm files...</code></pre>
 
   <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token punctuation">&#125;</span></code></pre>
-  <p> — Mar 6, 2021</p>
+<h2 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h2><pre class="language-none"><code class="language-none">if (fork() &#x3D;&#x3D; 0) &#123;
+  代码1
+&#125;
+代码2</code></pre>
+<p>子进程会执行代码2吗？ </p>
+<pre class="language-c" data-language="c"><code class="language-c"><span class="token keyword">int</span>
+<span class="token function">main</span><span class="token punctuation">(</span><span class="token keyword">int</span> argc<span class="token punctuation">,</span> <span class="token keyword">char</span> <span class="token operator">*</span>argv<span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+<span class="token punctuation">&#123;</span>
+  <span class="token keyword">int</span> pid <span class="token operator">=</span> <span class="token function">fork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>pid <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">&#123;</span>
+    <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"This is child\n"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// exit(0);</span>
+  <span class="token punctuation">&#125;</span>
+  <span class="token function">sleep</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token function">printf</span><span class="token punctuation">(</span><span class="token string">"pid: %d\n"</span><span class="token punctuation">,</span> pid<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">&#125;</span></code></pre>
+<p>输出  </p>
+<pre class="language-shell" data-language="shell"><code class="language-shell">This is child
+pid: 4
+pid: 0</code></pre>
+<p>其实是会执行代码2的，但是一般都会在子进程结束时加上exit，这样就不会执行代码2了。  </p>
+
+  <p><a class="classtest-link" href="/tags/xv6/" rel="tag">xv6</a> — Mar 6, 2021</p>
   
 
 
