@@ -215,7 +215,7 @@ sum_then_double<span class="token punctuation">:</span>
   ret</code></pre>
 <p>想着前段时间做nand2tetris的时候自己还写过vm translator，将vm code翻译为汇编语言，中间如何实现函数的调用和返回正好可以解答这一问题。但是我现在竟然想不起来了，真是太菜了，感觉还是得记录一下。<br><img src="../../imgs/func_call_return.png"><br>这是<a target="_blank" rel="noopener" href="https://drive.google.com/file/d/1lBsaO5XKLkUgrGY6g6vLMsiZo6rWxlYJ/view?usp=sharing">nand2tetris vm课件</a>中得一张截图。首先有两个概念，被调用的函数叫做callee，调用这个函数的函数叫做caller，以上述代码为例，sum_to就是一个callee，sum_then_double就是caller。caller在调用其他函数之前需要保存return address，return address是什么东西呢？只要知道return address是给程序计数器PC用的，就好理解了，return address指向callee执行完毕后接下来需要执行的指令。以上述代码为例，sum_then_double在调用sum_to之前（程序计数器跳转到sum_to的代码之前），会保存return address，return address应指向<code>call sum_to</code>的下一行，即<code>li t0, 2</code>。这样cpu执行完sum_to后，PC就会load return address，执行<code>li t0, 2</code>。现在再回头看开头的问题，如果去掉那几行，即不保存也不加载return address，sum_to执行完后，PC会指向sum_to函数的后一行<code>.global sum_then_double</code>，再接着又会执行sum_then_double，这样就会一直循环下去。<br>写这篇文章的时候我还不会risc-v的汇编，但是逻辑上应该没啥问题。</p>
 
-  <p><a class="classtest-link" href="/tags/nand2tetris-xv6/" rel="tag">nand2tetris, xv6</a> — Mar 10, 2021</p>
+  <p><a class="classtest-link" href="/tags/xv6/" rel="tag">xv6</a> — Mar 10, 2021</p>
   
 
 
